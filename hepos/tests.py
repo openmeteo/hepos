@@ -8,10 +8,10 @@ from hepos import (htrs07_geocentric_to_ggrs87_geocentric,
         ggrs87_geocentric_to_htrs07_geocentric,
         htrs07_geocentric_to_htrs07_plane,
         ggrs87_plane_to_htrs07_plane,
-        ggrs87_plane_to_htrs07_plane_kastelorizo,)
+        ggrs87_plane_to_htrs07_plane_kastellorizo,)
 
 class TestTransformations(unittest.TestCase):
-    
+
     def test_htrs07_geocentric_to_ggrs87_geocentric(self):
         result = htrs07_geocentric_to_ggrs87_geocentric(
                 4382064.771,
@@ -77,10 +77,10 @@ class TestTransformations(unittest.TestCase):
         self.assertAlmostEqual(result[0], 566445.986, delta=0.001)
         self.assertAlmostEqual(result[1], 2529617.912, delta=0.001)
 
-    def test_ggrs87_plane_to_htrs07_plane_kastelorizo(self):
+    def test_ggrs87_plane_to_htrs07_plane_kastellorizo(self):
         # TODO: This is a partial test, tests only if the function is
         # running, find some test data and add some assertEqual
-        ggrs87_plane_to_htrs07_plane_kastelorizo(
+        ggrs87_plane_to_htrs07_plane_kastellorizo(
                 2000, 3000, 10)
 
 if __name__ == '__main__':

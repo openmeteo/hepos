@@ -11,9 +11,9 @@ HTRS07_tx = 203.437
 HTRS07_ty = -73.461
 HTRS07_tz = -243.594
 
-HTRS07_tx_KASTELORIZO = -5.020
-HTRS07_ty_KASTELORIZO = -19.885
-HTRS07_tz_KASTELORIZO = -12.244
+HTRS07_tx_KASTELLORIZO = -5.020
+HTRS07_ty_KASTELLORIZO = -19.885
+HTRS07_tz_KASTELLORIZO = -12.244
 
 ARCSEC_TO_RAD = 2.0*pi/(360.0*60.0*60.0)
 
@@ -29,10 +29,10 @@ HTRS07_DISPLACEMENT_VECTOR = Vec([
         HTRS07_tz]
         )
 
-HTRS07_DISPLACEMENT_VECTOR_KASTELORIZO = Vec([
-        HTRS07_tx_KASTELORIZO,
-        HTRS07_ty_KASTELORIZO,
-        HTRS07_tz_KASTELORIZO]
+HTRS07_DISPLACEMENT_VECTOR_KASTELLORIZO = Vec([
+        HTRS07_tx_KASTELLORIZO,
+        HTRS07_ty_KASTELLORIZO,
+        HTRS07_tz_KASTELLORIZO]
         )
 
 HTRS07_ROTATION_MATRIX = Matrix(
@@ -47,7 +47,7 @@ HTRS07_ROTATION_MATRIX = Matrix(
 
 # This is the TM07 proj4 init string to transform geocentric or
 # ellipsoid coordinates to TM07 plane coordinates for Greece 
-# mainland (excluded Kastelorizo).
+# mainland (excluded Kastellorizo).
 # Ellipsoid: GGRS80
 # Projection Transverse Mercatoric
 # k_0=0.9996
@@ -58,26 +58,26 @@ PROJ4_TM07_INIT_STRING = '+ellps=GRS80 +proj=tmerc +k_0=0.9996 ' \
 
 # This is the TM07 proj4 init string to transform geocentric or
 # ellipsoid coordinates to TM07 plane coordinates for the case of the
-# area of Kastelorizo. 
+# area of Kastellorizo. 
 # Ellipsoid: GGRS80
 # Projection Transverse Mercatoric
 # k_0=1
 # lambda_0 = 30 degrees
 # False easting = 500000 meters False northing = -2000000 meters
-PROJ4_TM07_INIT_STRING_KASTELORIZO = \
+PROJ4_TM07_INIT_STRING_KASTELLORIZO = \
                          '+ellps=GRS80 +proj=tmerc +k_0=1 ' \
                          '+lon_0=30 +x_0=500000 +y_0=-2000000'
 
 # This is the TM87 proj4 init string to transform geocentric or
 # ellipsoid coordinates to TM87 plane coordinates for the case of the
-# area of Kastelorizo. For the rest of Greece TM87 parameters are
+# area of Kastellorizo. For the rest of Greece TM87 parameters are
 # trait equal to GGRS87.
 # Ellipsoid: GGRS80
 # Projection Transverse Mercatoric
 # k_0=0.9996
 # lambda_0 = 27 degrees
 # False easting = 500000 meters
-PROJ4_TM87_INIT_STRING_KASTELORIZO = \
+PROJ4_TM87_INIT_STRING_KASTELLORIZO = \
                          '+ellps=GRS80 +proj=tmerc +k_0=0.9996 ' \
                          '+lon_0=27 +x_0=500000'
 
@@ -161,8 +161,8 @@ def ggrs87_plane_to_htrs07_plane(e, n, h=0, apply_corrections=False):
     applied to the final result.
 
     Note: This function is only for use for the Greece mainland, not
-    for Kastelorizo area. For Kastelorizo area use:
-    ggrs87_plane_to_htrs07_plane_kastelorizo() function instead
+    for Kastellorizo area. For Kastellorizo area use:
+    ggrs87_plane_to_htrs07_plane_kastellorizo() function instead
     """
     # TODO: Implement corrections, set default to True
     if apply_corrections:
@@ -171,17 +171,17 @@ def ggrs87_plane_to_htrs07_plane(e, n, h=0, apply_corrections=False):
             *ggrs87_geocentric_to_htrs07_geocentric(
             *ggrs87_plane_to_ggrs87_geocentric(e, n, h)))
 
-def ggrs87_plane_to_htrs07_plane_kastelorizo(e, n, h=0):
+def ggrs87_plane_to_htrs07_plane_kastellorizo(e, n, h=0):
     """
     See also ggrs87_plane_to_htrs07_plane(). This function is for
-    special use for the area of Kastelorizo only.
+    special use for the area of Kastellorizo only.
     """
-    coords = transform(Proj(PROJ4_TM87_INIT_STRING_KASTELORIZO),
+    coords = transform(Proj(PROJ4_TM87_INIT_STRING_KASTELLORIZO),
             Proj(PROJ4_GRS80_GEOCENTRIC_INIT_STRING), e, n, h)
     ggrs87_coordinates_vector = Vec(coords)
     htrs07_coordinates_vector = ggrs87_coordinates_vector - \
-            HTRS07_DISPLACEMENT_VECTOR_KASTELORIZO
+            HTRS07_DISPLACEMENT_VECTOR_KASTELLORIZO
     return transform(Proj(PROJ4_GRS80_GEOCENTRIC_INIT_STRING),
-            Proj(PROJ4_TM07_INIT_STRING_KASTELORIZO),
+            Proj(PROJ4_TM07_INIT_STRING_KASTELLORIZO),
             *htrs07_coordinates_vector)
 

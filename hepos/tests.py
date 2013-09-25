@@ -2,7 +2,7 @@
 
 import unittest
 
-from pyhepos import (htrs07_geocentric_to_ggrs87_geocentric,
+from hepos import (htrs07_geocentric_to_ggrs87_geocentric,
         htrs07_geocentric_to_ggrs87_plane,
         ggrs87_plane_to_ggrs87_geocentric,
         ggrs87_geocentric_to_htrs07_geocentric,

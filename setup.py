@@ -9,7 +9,7 @@ from pkg_resources import parse_version
 
 setup(
     name="hepos",
-    version="dev",
+    version="0.1.0",
     license="GPL3",
     description="Greek co-ordinate transformations using the HEPOS algorithm",
     author="Antonis Christofides",
